@@ -2,6 +2,10 @@ import java.util.Scanner;
 
 public class GameOfLife {
     public static void main(String[] args) {
+        gameOfLife();
+    }
+
+    private static void gameOfLife() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Give the length ");
         int length = sc.nextInt();
@@ -10,12 +14,16 @@ public class GameOfLife {
         int[][] randomState = previousState(length, width);
         System.out.println(("first generation"));
         printState(randomState);
+        System.out.println("How many generation do you want?");
+        int totalGenerations = sc.nextInt();
         int[][] nextState = nextState(randomState, length, width);
         System.out.println("next generation");
         printState(nextState);
-        nextState = nextState(nextState, length, width);
-        System.out.println("next generation");
-        printState(nextState);
+        for (int i = 0; i < totalGenerations - 1; i++) {
+            nextState = nextState(nextState, length, width);
+            System.out.println("next generation");
+            printState(nextState);
+        }
     }
 
     private static int[][] nextState(int[][] previousState, int length, int width) {
